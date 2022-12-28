@@ -25,7 +25,8 @@ from FLAME import FLAME
 import pyrender
 import trimesh
 from config import get_config
-
+import os
+os.environ['KMP_DUPLICATE_LIB_OK']='True'
 config = get_config()
 radian = np.pi/180.0
 flamelayer = FLAME(config)
@@ -56,7 +57,7 @@ print(vertice.size(), landmark.size())
 
 if config.optimize_eyeballpose and config.optimize_neckpose:
     neck_pose = torch.zeros(8, 3).cuda()
-    eye_pose = torch.zeros(8, 6).cuda()
+    eye_pose = torch.ones(8, 6).cuda()
     vertice, landmark = flamelayer(shape_params, expression_params, pose_params, neck_pose, eye_pose)
 
 # Visualize Landmarks
@@ -72,7 +73,7 @@ for i in range(8):
     mesh = pyrender.Mesh.from_trimesh(tri_mesh)
     scene = pyrender.Scene()
     scene.add(mesh)
-    sm = trimesh.creation.uv_sphere(radius=0.005)
+    sm = trimesh.creation.uv_sphere(radius=0.001)
     sm.visual.vertex_colors = [0.9, 0.1, 0.1, 1.0]
     tfs = np.tile(np.eye(4), (len(joints), 1, 1))
     tfs[:, :3, 3] = joints

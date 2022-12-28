@@ -1,6 +1,7 @@
 import argparse
 import os
 
+os.environ['KMP_DUPLICATE_LIB_OK']='True'
 parser = argparse.ArgumentParser(description = 'FLAME model')
 
 parser.add_argument(
@@ -13,7 +14,7 @@ parser.add_argument(
 parser.add_argument(
     '--static_landmark_embedding_path',
     type = str,
-    default = './model/flame_static_embedding.pkl',
+    default = './model/flame_static_embeddings.pkl',
     help = 'Static landmark embeddings path for FLAME'
 )
 

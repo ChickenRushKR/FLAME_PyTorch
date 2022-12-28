@@ -1,0 +1,10 @@
+*.pyc
+*.pkl
+*.ply
+*.png
+*.tar
+*.zip
+*.obj
+*.pdf
+*.npz
+*.npy
